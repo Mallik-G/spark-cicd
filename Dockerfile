@@ -49,7 +49,9 @@ ENV HADOOP_VERSION 2.4.0
 
 # SPARK
 ARG SPARK_ARCHIVE=https://d3kbcqa49mib13.cloudfront.net/spark-$SPARK_VERSION-bin-hadoop$HADOOP_PROFILE.tgz
-RUN curl -s $SPARK_ARCHIVE | tar -xz -C /usr/local/
+RUN curl -s $SPARK_ARCHIVE | tar -xz -C /usr/local/ && \
+    echo 'export SPARK_HOME=/opt/spark-$SPARK_VERSION-bin-hadoop-$HADOOP_PROFILE' >> /etc/profile && \
+    echo 'export PATH=$PATH:$SPARK_HOME/bin' >> /etc/profile && \
 
 ENV SPARK_HOME /usr/local/spark-SPARK_VERSION-bin-hadoop$HADOOP_PROFILE
 ENV PATH $PATH:$SPARK_HOME/bin
