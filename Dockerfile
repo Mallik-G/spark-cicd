@@ -36,8 +36,20 @@ RUN rpm -ivh sbt-$SBT_VERSION.rpm --nodeps
 ENV SCALA_TAR_URL http://www.scala-lang.org/files/archive
 ENV SCALA_VERSION 2.10.4
 #
-RUN wget $SCALA_TAR_URL/scala-$SCALA_VERSION.tgz
+RUN wget –quiet $SCALA_TAR_URL/scala-$SCALA_VERSION.tgz
 RUN tar xvf scala-$SCALA_VERSION.tgz
 RUN mv scala-$SCALA_VERSION /usr/lib
 RUN rm scala-$SCALA_VERSION.tgz
 RUN ln -s /usr/lib/scala-$SCALA_VERSION /usr/lib/scala
+
+ENV SPARK_PROFILE 2.1
+ENV SPARK_VERSION 2.1.1
+ENV HADOOP_PROFILE 2.7
+ENV HADOOP_VERSION 2.4.0
+
+# SPARK
+ARG SPARK_ARCHIVE=https://d3kbcqa49mib13.cloudfront.net/spark-$SPARK_VERSION-bin-hadoop$HADOOP_PROFILE.tgz
+RUN curl -s $SPARK_ARCHIVE | tar -xz -C /usr/local/
+
+ENV SPARK_HOME /usr/local/spark-SPARK_VERSION-bin-hadoop$HADOOP_PROFILE
+ENV PATH $PATH:$SPARK_HOME/bin
