@@ -1,12 +1,12 @@
 pipeline {
   agent { dockerfile true }
   stages {
-    stage('Build') {
+    stage('Compile App') {
       steps {
         sh 'sbt clean compile'
       }
     }
-    stage('Unit') {
+    stage('Unit Test') {
       steps {
         sh 'sbt test'
       }
