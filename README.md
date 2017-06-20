@@ -88,12 +88,12 @@ aws emr create-default-roles
 ### Backup Jobs
 How to backup a Job configuration to an xml file
 ```
-curl -s http://<user>:<password>@<jenkins_address>:<port>/job/<JOBNAME>/jenkins-job.xml
+curl -s http://<user>:<password>@<jenkins_address>:<port>/job/<JOBNAME>/config.xml > jenkins-job.xml
 ```
 
 ### Import Job
 
 How to create a Job from from a Backup
 ```
-CRUMB=$(curl -s 'http://<user>:<password>@<jenkins_address>:<port>/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)')
-curl -H "$CRUMB" -X POST 'http://<user>:<password>@<jenkins_address>:<port>/createItem?name=CICDSPARK' --header "Content-Type: application/xml" -d @jenkins-job.xml
+CRUMB=$(curl -s -u admin:admin "$JENKINS_URL/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)")
+curl -H "$CRUMB" -X POST  -u admin:admin "$JENKINS_URL/createItem?name=CICDSPARK" --header "Content-Type: application/xml" -d @jenkins-job.xml

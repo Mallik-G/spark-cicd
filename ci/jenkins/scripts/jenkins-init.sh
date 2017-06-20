@@ -38,6 +38,8 @@ sudo systemctl status docker
 sudo usermod -aG docker jenkins
 sudo usermod -aG docker ubuntu
 
+sudo su  jenkins -c 'ssh-keygen -f ~/.ssh/id_rsa -N ""'
+
 
 # install terraform
 cd /usr/local/bin
