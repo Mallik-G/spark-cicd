@@ -1,6 +1,8 @@
 package ch.scigility
 
 
+import frameless.TypedDataset
+import frameless.functions.aggregate.sum
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql._
 
@@ -8,21 +10,14 @@ import org.apache.spark.sql._
   * Created by snuesch on 15.06.17.
   */
 object CharCounter {
-  def countLetters(rdd: Dataset[String])(implicit spark: SparkSession):Dataset[(String,Long)] = {
+  def countLetters(lines: TypedDataset[String])(implicit spark: SparkSession):TypedDataset[(String,Long)] = {
     import spark.implicits._
-    val kv = for {
-      str <- rdd
-      ch <- str
-    } yield (ch.toString, 1)
+    val kv: TypedDataset[(String, Int)] = for{
+      str <- lines
+      chr <- str
+    } yield(chr.toString, 1)
 
-    kv
-      .groupBy(kv("_1"))
-      .sum("_2")
-      .map(
-        row => {
-          (row.getString(0), row.getLong(1))
-        }
-      )
+    kv.groupBy(kv('_1)).agg(sum(kv('_2)))
 
   }
 
