@@ -23,7 +23,7 @@ RUN \
   echo '' >> /etc/profile && \
   echo '# set JAVAHOME' >> /etc/profile && \
   echo 'export JAVA_HOME=/usr/java/jdk1.8.0_121' >> /etc/profile && \
-  'export PATH=$JAVA_HOME/bin:$PATH' >> /etc/profile && \
+  echo 'export PATH=$JAVA_HOME/bin:$PATH' >> /etc/profile && \
   source /etc/profile
 
 #versions
