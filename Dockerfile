@@ -29,8 +29,8 @@ RUN \
 # install sbt
 ENV SBT_VERSION 0.13.6
 #
-RUN curl  -sLo /tmp/sbt.tar.gz 'https://dl.bintray.com/sbt/native-packages/sbt/${SBT_VERSION}/sbt-${SBT_VERSION}.tgz'
-RUN tar xzf /tmp/sbt.tar.gz -C /opt && rm /tmp/sbt.tar.gz && \
+RUN curl -O -L http://dl.bintray.com/sbt/rpm/sbt-$SBT_VERSION.rpm
+RUN rpm -ivh sbt-$SSBT_VERSION.rpm --nodeps
 RUN ln -s /opt/sbt/bin/sbt /usr/bin/
 
 # install scala
