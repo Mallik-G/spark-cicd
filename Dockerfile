@@ -26,11 +26,15 @@ RUN \
   echo 'export PATH=$JAVA_HOME/bin:$PATH' >> /etc/profile && \
   source /etc/profile
 
-#versions
+# install sbt
+ENV SBT_VERSION 0.13.6
+RUN \
+  curl  -sLo /tmp/sbt.tar.gz 'https://dl.bintray.com/sbt/native-packages/sbt/${SBT_VERSION}/sbt-${SBT_VERSION}.tgz' && \
+  tar xzf /tmp/sbt.tar.gz -C /opt && rm /tmp/sbt.tar.gz && \
+  ln -s /opt/sbt/bin/sbt /usr/bin/
+
 ENV SCALA_TAR_URL http://www.scala-lang.org/files/archive
 ENV SCALA_VERSION 2.10.4
-ENV SBT_VERSION 0.13.6
-
 
 #install scala
 RUN wget $SCALA_TAR_URL/scala-$SCALA_VERSION.tgz
@@ -38,10 +42,3 @@ RUN tar xvf scala-$SCALA_VERSION.tgz
 RUN mv scala-$SCALA_VERSION /usr/lib
 RUN rm scala-$SCALA_VERSION.tgz
 RUN ln -s /usr/lib/scala-$SCALA_VERSION /usr/lib/scala
-
-ENV PATH $PATH:/usr/lib/scala/bin
-
-# install sbt
-RUN wget -O /usr/local/bin/sbt-launch.jar http://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/$SBT_VERSION/sbt-launch.jar
-ADD scripts/sbt.sh /usr/local/bin/sbt
-RUN chmod 755 /usr/local/bin/sbt
