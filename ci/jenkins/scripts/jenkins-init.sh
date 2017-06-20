@@ -19,12 +19,12 @@ wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key 
 echo "deb http://pkg.jenkins.io/debian-stable binary/" | sudo tee --append /etc/apt/sources.list > /dev/null
 
 sudo apt-get update
-sudo apt-get install -y jenkins=${JENKINS_VERSION} unzip
+sudo apt-get install -y unzip
+sudo apt-get install -y jenkins
 
 # install pip
 sudo wget -q https://bootstrap.pypa.io/get-pip.py
-sudo python get-pip.py
-sudo python3 get-pip.py
+sudo -H python3 get-pip.py
 sudo rm -f get-pip.py
 # install awscli
 sudo pip install awscli
@@ -35,6 +35,9 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt-get update
 sudo apt-get install -y docker-ce
 sudo systemctl status docker
+sudo usermod -aG docker jenkins
+sudo usermod -aG docker ubuntu
+
 
 # install terraform
 cd /usr/local/bin
