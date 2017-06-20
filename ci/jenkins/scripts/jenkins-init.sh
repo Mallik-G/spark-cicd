@@ -4,7 +4,7 @@
 sudo vgchange -ay
 
 DEVICE_FS=`blkid -o value -s TYPE ${DEVICE}`
-if [ "`echo -n $DEVICE_FS`" == "" ] ; then 
+if [ "`echo -n $DEVICE_FS`" == "" ] ; then
 	pvcreate ${DEVICE}
 	vgcreate data ${DEVICE}
 	lvcreate --name volume1 -l 100%FREE data
@@ -28,6 +28,13 @@ sudo python3 get-pip.py
 sudo rm -f get-pip.py
 # install awscli
 sudo pip install awscli
+
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce
+sudo systemctl status docker
 
 # install terraform
 cd /usr/local/bin

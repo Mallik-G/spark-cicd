@@ -40,6 +40,12 @@ pipeline {
   }
 }
 ```
+TO test the Jenkinsfile run:
+
+```
+JENKINS_CRUMB=`curl -u admin:admin "$JENKINS_URL/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)"`
+curl -u admin:admin  -X POST -H $JENKINS_CRUMB -F "jenkinsfile=<Jenkinsfile" $JENKINS_URL/pipeline-model-converter/validate
+```
 
 
 ## Installing Docker on Jenkins
