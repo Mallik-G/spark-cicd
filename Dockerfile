@@ -36,7 +36,7 @@ RUN rpm -ivh sbt-$SBT_VERSION.rpm --nodeps
 ENV SCALA_TAR_URL http://www.scala-lang.org/files/archive
 ENV SCALA_VERSION 2.10.4
 #
-RUN wget –quiet $SCALA_TAR_URL/scala-$SCALA_VERSION.tgz
+RUN wget -q $SCALA_TAR_URL/scala-$SCALA_VERSION.tgz
 RUN tar xvf scala-$SCALA_VERSION.tgz
 RUN mv scala-$SCALA_VERSION /usr/lib
 RUN rm scala-$SCALA_VERSION.tgz
