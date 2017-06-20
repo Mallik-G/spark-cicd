@@ -1,6 +1,5 @@
-pipeline {
-  agent any
-  stages{
+node {
+  stages {
     stage('build') {
       steps {
         sh 'sbt clean compile'
