@@ -75,3 +75,18 @@ For running Spark as a service on AWS, make sure that you run:
 ```
 aws emr create-default-roles
 ```
+
+## Jenkins Jobs
+
+### Backup Jobs
+How to backup a Job configuration to an xml file
+```
+curl -s http://<user>:<password>@<jenkins_address>:<port>/job/<JOBNAME>/jenkins-job.xml
+```
+
+### Import Job
+
+How to create a Job from from a Backup
+```
+CRUMB=$(curl -s 'http://<user>:<password>@<jenkins_address>:<port>/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)')
+curl -H "$CRUMB" -X POST 'http://<user>:<password>@<jenkins_address>:<port>/createItem?name=CICDSPARK' --header "Content-Type: application/xml" -d @jenkins-job.xml
