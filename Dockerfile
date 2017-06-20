@@ -28,15 +28,15 @@ RUN \
 
 # install sbt
 ENV SBT_VERSION 0.13.6
-RUN \
-  curl  -sLo /tmp/sbt.tar.gz 'https://dl.bintray.com/sbt/native-packages/sbt/${SBT_VERSION}/sbt-${SBT_VERSION}.tgz' && \
-  tar xzf /tmp/sbt.tar.gz -C /opt && rm /tmp/sbt.tar.gz && \
-  ln -s /opt/sbt/bin/sbt /usr/bin/
+#
+RUN curl  -sLo /tmp/sbt.tar.gz 'https://dl.bintray.com/sbt/native-packages/sbt/${SBT_VERSION}/sbt-${SBT_VERSION}.tgz'
+RUN tar xzf /tmp/sbt.tar.gz -C /opt && rm /tmp/sbt.tar.gz && \
+RUN ln -s /opt/sbt/bin/sbt /usr/bin/
 
+# install scala
 ENV SCALA_TAR_URL http://www.scala-lang.org/files/archive
 ENV SCALA_VERSION 2.10.4
-
-#install scala
+#
 RUN wget $SCALA_TAR_URL/scala-$SCALA_VERSION.tgz
 RUN tar xvf scala-$SCALA_VERSION.tgz
 RUN mv scala-$SCALA_VERSION /usr/lib
