@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject plugin="workflow-multibranch@2.15">
+<org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject plugin="workflow-multibranch@2.16">
   <actions/>
   <description></description>
   <displayName>Basic Spark Job Example</displayName>
@@ -31,11 +31,11 @@
       <jenkins.branch.BranchSource>
         <source class="jenkins.plugins.git.GitSCMSource" plugin="git@3.3.0">
           <id>3413bdec-df4c-407f-88fc-47628a4d92e1</id>
-          <remote>git@github.com:nueschs/basicSpark.git</remote>
+          <remote>git@github.com:scigility/spark-cicd.git</remote>
           <credentialsId>1ea7e010-c6e4-4d98-932d-55a881daeb37</credentialsId>
           <remoteName>origin</remoteName>
           <rawRefSpecs>+refs/heads/*:refs/remotes/origin/*</rawRefSpecs>
-          <includes>proposal/frameless</includes>
+          <includes>*</includes>
           <excludes></excludes>
           <ignoreOnPushNotifications>false</ignoreOnPushNotifications>
           <browser class="hudson.plugins.git.browser.GithubWeb">
