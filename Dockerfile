@@ -11,7 +11,7 @@ RUN  yum update -y && yum install -y \
   httpie
 
 RUN \
-  wget https://s3.eu-central-1.amazonaws.com/com.scigility.archives/java/jdk-8u121-linux-x64.rpm
+  wget https://s3.eu-central-1.amazonaws.com/com.scigility.archives/java/jdk-8u121-linux-x64.rpm && \
   yum localinstall -y ./jdk-8u121-linux-x64.rpm && \
   alternatives --install /usr/bin/java java /usr/java/jdk1.8.0_121/jre/bin/java 20000 && \
   alternatives --install /usr/bin/javac javac /usr/java/jdk1.8.0_121/bin/javac 20000 && \
