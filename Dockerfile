@@ -30,7 +30,7 @@ RUN \
 ENV SBT_VERSION 0.13.6
 #
 RUN curl -O -L http://dl.bintray.com/sbt/rpm/sbt-$SBT_VERSION.rpm
-RUN rpm -ivh sbt-$SSBT_VERSION.rpm --nodeps
+RUN rpm -ivh sbt-$SBT_VERSION.rpm --nodeps
 RUN ln -s /opt/sbt/bin/sbt /usr/bin/
 
 # install scala
